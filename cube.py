@@ -5,12 +5,12 @@ def copy_cube(cube):
 
 def create_solved_cube():
     return {
-        "U": ["W", "W", "W", "W"],
-        "D": ["Y", "Y", "Y", "Y"],
-        "F": ["G", "G", "G", "G"],
-        "B": ["B", "B", "B", "B"],
-        "L": ["O", "O", "O", "O"],
-        "R": ["R", "R", "R", "R"]
+        "U": ["Y", "Y", "Y", "Y"],
+        "D": ["W", "W", "W", "W"],
+        "F": ["R", "R", "R", "R"],
+        "B": ["O", "O", "O", "O"],
+        "L": ["B", "B", "B", "B"],
+        "R": ["G", "G", "G", "G"]
     }
 
 def get_cube_input():
