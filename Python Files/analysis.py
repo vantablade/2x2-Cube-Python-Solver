@@ -31,8 +31,6 @@ def most_completed_face(cube):
             
     return highest_face, best_count, best_colour
 
-face, count, colour = most_completed_face(cube)
-print(f"Face: {face}, Count: {count}, Colour: {colour}")
 
 def get_face(cube, orientation, face):
     return cube[orientation[face]]
@@ -160,3 +158,61 @@ def find_corner(cube, orientation, colours):
             return position
         
     return None
+
+def detect_first_face_case(cube, orientation, down_colour):
+    dfr = get_corner(cube, orientation, "DFR")
+    dfl = get_corner(cube, orientation, "DFL")
+    dbr = get_corner(cube, orientation, "DBR")
+    dbl = get_corner(cube, orientation, "DBL")
+
+    bottom = {
+        "DFR": dfr["D"] == down_colour,
+        "DFL": dfl["D"] == down_colour,
+        "DBR": dbr["D"] == down_colour,
+        "DBL": dbl["D"] == down_colour
+    }
+
+    correct = sum(bottom.values())
+
+    case = {}
+    if correct == 4:
+        case['number'] = 4
+        case['type'] = 'Solved'
+
+    elif correct == 3:
+        case['number'] = 3
+
+        for corner, is_correct in bottom.items():
+            if not is_correct:   
+                case['missing_corner'] = corner
+                break
+
+    elif correct == 2:
+        case["number"] = 2
+
+        corners = []
+
+        for corner, is_correct in bottom.items():
+            if is_correct:
+                corners.append(corner)
+
+        case["corners"] = corners
+
+        shared_letters = len(
+            set(corners[0]) &
+            set(corners[1])
+        )
+
+        if shared_letters == 2:
+            case["layout"] = "Adjacent"
+        else:
+            case["layout"] = "Diagonal"
+
+    else:
+        case['number'] = 1
+        for corner, is_correct in bottom.items():
+            if is_correct:
+                case['corner'] = corner
+                break
+
+    return case

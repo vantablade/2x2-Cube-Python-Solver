@@ -1,10 +1,10 @@
-from cube import create_solved_cube
+from cube import *
 from display import display_cube
 from moves import *
 from analysis import *
 
 cube = create_solved_cube()
+cube = apply_algorithm(cube, "R2 U2 F R F2 R2 U R U'")
 
-orientation = ORIENTATIONS["F"]
-
-print(get_corner(cube, orientation, "DFR"))
+for face in cube: 
+    print(face, cube[face])
