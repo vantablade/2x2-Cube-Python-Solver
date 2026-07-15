@@ -5,5 +5,6 @@ from analysis import *
 
 cube = create_solved_cube()
 
-cube = most_completed_face(cube)
-print(most_completed_face)
+orientation = ORIENTATIONS["F"]
+
+print(get_corner(cube, orientation, "DFR"))

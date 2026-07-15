@@ -30,3 +30,5 @@ def display_cube(cube):
     print("      " + cube["D"][2] + " " + cube["D"][3])
 
     print()
+
+    return cube
